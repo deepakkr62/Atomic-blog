@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import {createContext useEffect, useState } from "react";
 import { faker } from "@faker-js/faker";
 
 function createRandomPost() {
@@ -7,6 +7,8 @@ function createRandomPost() {
     body: faker.hacker.phrase(),
   };
 }
+//1. create a context object. This is the object that will be used to provide and consume the context value.
+const PostContext=createContext();
 
 function App() {
   const [posts, setPosts] = useState(() =>
@@ -42,6 +44,15 @@ function App() {
   );
 
   return (
+    //providing the context value to all the components inside the provider. The value is an object that 
+    // contains the posts, the functions to add and clear posts, and the search query and its setter function.
+    <PostContext.Provider value={{
+      posts:searchedPosts,
+      onAddPost:handleAddPost,
+      onClearPosts:handleClearPosts,
+      searchQuery,
+      setSearchQuery
+    }}>
     <section>
       <button
         onClick={() => setIsFakeDark((isFakeDark) => !isFakeDark)}
@@ -60,6 +71,7 @@ function App() {
       <Archive onAddPost={handleAddPost} />
       <Footer />
     </section>
+    </PostContext.Provider>
   );
 }
 
