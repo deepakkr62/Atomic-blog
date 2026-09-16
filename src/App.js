@@ -1,6 +1,7 @@
 import { createContext, useEffect, useState, useContext } from "react";
 import { faker } from "@faker-js/faker";
 import { PostProvider, usePosts } from "./PostContext";
+import Test from "./Test";
 
 function createRandomPost() {
   return {
@@ -13,8 +14,6 @@ function App() {
   // it throw error because we are trying to use the context outside of the provider. The provider is the one that
   //  provides the context value to all the components inside it. So we need to wrap the components that need the
   //  context value with the provider.
-  const x = usePosts();
-  console.log(x);
   const [isFakeDark, setIsFakeDark] = useState(false);
   // Whenever `isFakeDark` changes, we toggle the `fake-dark-mode` class on the HTML element (see in "Elements" dev tool).
   useEffect(
@@ -125,14 +124,17 @@ function FormAddPost() {
 
 function List({ posts }) {
   return (
-    <ul>
-      {posts.map((post, i) => (
-        <li key={i}>
-          <h3>{post.title}</h3>
-          <p>{post.body}</p>
-        </li>
-      ))}
-    </ul>
+    <>
+      <ul>
+        {posts.map((post, i) => (
+          <li key={i}>
+            <h3>{post.title}</h3>
+            <p>{post.body}</p>
+          </li>
+        ))}
+      </ul>
+      {/* <Test /> */}
+    </>
   );
 }
 

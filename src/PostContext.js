@@ -16,7 +16,6 @@ function PostProvider({ children }) {
   const [searchQuery, setSearchQuery] = useState("");
   const [isFakeDark, setIsFakeDark] = useState(false);
 
-  // Derived state. These are the posts that will actually be displayed
   const searchedPosts =
     searchQuery.length > 0
       ? posts.filter((post) =>
@@ -48,11 +47,6 @@ function PostProvider({ children }) {
     </PostContext.Provider>
   );
 }
-// The PostProvider component is a context provider that provides the context value to all the components inside it
-// . The value is an object that contains the posts, the functions to add and clear posts, and the search query
-// and its setter function.
-
-//simple way to create cutom context is to copy cut all the state and conetxt value and return it
 
 function usePosts() {
   const context = useContext(PostContext);
@@ -63,7 +57,3 @@ function usePosts() {
 }
 
 export { PostProvider, usePosts };
-
-// This is a custom hook that allows us to consume the context value from the PostContext.Provider.
-// It checks if the context is undefined, which means that the component is not wrapped in a PostProvider.
-// If it is undefined, it throws an error. Otherwise, it returns the context value.
